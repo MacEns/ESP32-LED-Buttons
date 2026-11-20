@@ -6,13 +6,14 @@ using System.Threading;
 namespace Esp32Buttons
 {
     /// <summary>
-    /// Four momentary push buttons, each toggling its own LED on press.
+    /// Five momentary push buttons, each toggling its own LED on press.
     ///
     /// Wiring (default pins, change the arrays below to match your board):
     ///   Button 1: GPIO 15  ->  LED 1: GPIO 16
     ///   Button 2: GPIO 4   ->  LED 2: GPIO 17
     ///   Button 3: GPIO 5   ->  LED 3: GPIO 19
     ///   Button 4: GPIO 18  ->  LED 4: GPIO 21
+    ///   Button 5: GPIO 23  ->  LED 5: GPIO 22
     ///
     /// Buttons use the ESP32's internal pull-ups: wire each button between
     /// its GPIO and GND (pressed = LOW). Wire each LED from its GPIO through
@@ -20,15 +21,18 @@ namespace Esp32Buttons
     /// </summary>
     public class Program
     {
-        private static readonly int[] ButtonPins = { 15, 4, 5, 18 };
-        private static readonly int[] LedPins = { 16, 17, 19, 21 };
+        private static readonly int[] ButtonPins = { 15, 4, 5, 18, 23 };
+        private static readonly int[] LedPins = { 16, 17, 19, 21, 22 };
 
         // Test mode: blink the onboard LED (GPIO 2 on most dev boards) N times
         // when button N is pressed. Lets you verify buttons with no LEDs wired.
         private const bool OnboardLedFeedback = false;
         private const int OnboardLedPin = 2;
 
-        private const long DebounceTicks = 50 * TimeSpan.TicksPerMillisecond;
+        // Lockout window after an accepted press: further edges from this
+        // button are ignored until it elapses. Filters contact bounce on both
+        // press and release (release bounce was re-toggling LEDs at 50 ms).
+        private const long PressLockoutTicks = 250 * TimeSpan.TicksPerMillisecond;
 
         private static GpioController s_gpio;
         private static long[] s_lastPressTicks;
@@ -76,9 +80,9 @@ namespace Esp32Buttons
                 return;
             }
 
-            // Software debounce: ignore edges that arrive too soon after the last press.
+            // Ignore edges that arrive while this button's lockout is active.
             long now = DateTime.UtcNow.Ticks;
-            if (now - s_lastPressTicks[index] < DebounceTicks)
+            if (now - s_lastPressTicks[index] < PressLockoutTicks)
             {
                 return;
             }
