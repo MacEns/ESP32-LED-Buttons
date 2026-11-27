@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Esp32Buttons", "Esp32Buttons\Esp32Buttons.nfproj", "{7E1C697E-2CBE-4F2F-8B8A-3A5E2C1D9B10}"
 EndProject
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "PicoButtons", "PicoButtons\PicoButtons.nfproj", "{E6CBA0C0-A04A-4EE4-8FC7-2EC7D98272E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,12 @@ Global
 		{7E1C697E-2CBE-4F2F-8B8A-3A5E2C1D9B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E1C697E-2CBE-4F2F-8B8A-3A5E2C1D9B10}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7E1C697E-2CBE-4F2F-8B8A-3A5E2C1D9B10}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E6CBA0C0-A04A-4EE4-8FC7-2EC7D98272E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6CBA0C0-A04A-4EE4-8FC7-2EC7D98272E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6CBA0C0-A04A-4EE4-8FC7-2EC7D98272E9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E6CBA0C0-A04A-4EE4-8FC7-2EC7D98272E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6CBA0C0-A04A-4EE4-8FC7-2EC7D98272E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6CBA0C0-A04A-4EE4-8FC7-2EC7D98272E9}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
